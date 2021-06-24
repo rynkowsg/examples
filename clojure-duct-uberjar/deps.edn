@@ -36,12 +36,6 @@
                                      "--interactive"        ;; -i
                                      "--repl-fn" "rebel-readline.main/-main"]} ;; -f
 
-           :uberjar   {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}}
-
-           :uberdeps  {:replace-deps  {uberdeps/uberdeps {:mvn/version "1.0.4"}}
-                       :replace-paths []
-                       :main-opts     ["-m" "uberdeps.uberjar"]}
-
            ;; List dependencies that have new available versions.
            :antq      {:replace-paths []
                        :replace-deps  {com.github.liquidz/antq {:mvn/version "0.15.3"}}}
@@ -49,4 +43,19 @@
            :clj-kondo {:replace-deps {clj-kondo/clj-kondo {:mvn/version "RELEASE"}}
                        :main-opts    ["-m" "clj-kondo.main"]}
 
-           :cljfmt    {:replace-deps {cljfmt/cljfmt {:mvn/version "0.8.0"}}}}}
+           :cljfmt    {:replace-deps {cljfmt/cljfmt {:mvn/version "0.8.0"}}}
+
+           ; pack.alpha - tool for uberjar'ing
+           ; ---
+           ; It turns out that depstar (https://github.com/seancorfield/depstar) and
+           ; uberdeps (https://github.com/tonsky/uberdeps) don't work with Duct.
+           ; The problem is described here: https://github.com/duct-framework/duct/issues/92
+           ; Alternative to pack.alpha is using `lein uberjar`, but since I don't want to integrate
+           ; Leiningen only for uberjars, I decided to go with pack.alpha.
+           ; FYI: Capsule project is dead"
+           ; - https://github.com/juxt/pack.alpha/issues/88
+           ; - https://github.com/puniverse/capsule/issues/134
+           ; Capsule docs:
+           ; https://web.archive.org/web/20191207104737/http://www.capsule.io/
+           :pack      {:extra-deps {pack/pack.alpha {:git/url "https://github.com/juxt/pack.alpha.git"
+                                                     :sha     "511c32d4238afb860ad0b16c4827322d80c7d615"}}}}}

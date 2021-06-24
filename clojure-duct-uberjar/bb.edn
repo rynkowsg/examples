@@ -24,7 +24,7 @@
                   local-repl    (print-exec '(clojure "-M:dev:test:repl"))
                   run:dev       (print-exec '(clojure "-M:dev -m example.main") *command-line-args*)
                   run:prod      (print-exec '(clojure "-M:prod -m example.main") *command-line-args*)
-                  compile:dev   (print-exec '(clojure "-X:uberjar hf.depstar/uberjar :aliases '[:dev]' :jar main-dev.jar :main-class example.main"))
-                  compile:prod  (print-exec '(clojure "-X:uberjar hf.depstar/uberjar :aliases '[:prod]' :jar main-prod.jar :main-class example.main"))
-                  run-jar:dev   (print-exec '(shell "java -XX:-OmitStackTraceInFastThrow -jar main-dev.jar"))
-                  run-jar:prod  (print-exec '(shell "java -XX:-OmitStackTraceInFastThrow -jar main-prod.jar"))}}
+                  compile:dev   (print-exec '(clojure "-M:pack -m mach.pack.alpha.capsule uberjar-dev.jar -e app/dev/src --application-id example --application-version \"1.0\" -m example.main"))
+                  compile:prod  (print-exec '(clojure "-M:pack -m mach.pack.alpha.capsule uberjar-prod.jar -e app/prod/src --application-id example --application-version \"1.0\" -m example.main"))
+                  run-jar:dev   (print-exec '(shell "java -XX:-OmitStackTraceInFastThrow -jar uberjar-dev.jar"))
+                  run-jar:prod  (print-exec '(shell "java -XX:-OmitStackTraceInFastThrow -jar uberjar-prod.jar"))}}
