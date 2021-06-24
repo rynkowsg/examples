@@ -1,0 +1,30 @@
+{:min-bb-version "0.4.3"
+ :paths          ["scripts"]
+ :tasks          {:requires     ([bb-helper :refer [print-exec]]
+                                 [clojure.string :refer [join]])
+                  ; COMMON
+                  ; TODO: try to replace print-exec by using :enter and (current-task)
+                  deps          (print-exec '(clojure "-M:antq -m antq.core") *command-line-args*)
+                  deps-upgrade  (shell "bb deps --upgrade")
+                  format        (print-exec '(clojure "-M:cljfmt -m cljfmt.main"
+                                               "--indentation"
+                                               "--remove-surrounding-whitespace"
+                                               "--remove-trailing-whitespace"
+                                               "--insert-missing-whitespace"
+                                               "--remove-consecutive-blank-lines") *command-line-args*)
+                  format-check  (shell "bb cljfmt check app/dev/src app/main/src app/test/src app/repl/src")
+                  format-fix    (shell "bb cljfmt fix app/dev/src app/main/src app/test/src app/repl/src")
+                  lint          (print-exec '(clojure "-M:dev:test:clj-kondo --lint app/main --lint app/test"))
+                  log           (print-exec '(shell "tail -F logs/dev.log"))
+                  pom           (print-exec '(clojure "-Spom"))
+                  test          (print-exec '(clojure "-M:dev:test -m kaocha.runner --config-file tests.edn") *command-line-args*)
+                  test-coverage (shell "bb test --plugin kaocha.plugin/cloverage")
+                  test-profiler (shell "bb test --plugin kaocha.plugin/profiling")
+                  ; COMPILATION / EXECUTION / REPL
+                  local-repl    (print-exec '(clojure "-M:dev:test:repl"))
+                  run:dev       (print-exec '(clojure "-M:dev -m example.main") *command-line-args*)
+                  run:prod      (print-exec '(clojure "-M:prod -m example.main") *command-line-args*)
+                  compile:dev   (print-exec '(clojure "-X:uberjar hf.depstar/uberjar :aliases '[:dev]' :jar main-dev.jar :main-class example.main"))
+                  compile:prod  (print-exec '(clojure "-X:uberjar hf.depstar/uberjar :aliases '[:prod]' :jar main-prod.jar :main-class example.main"))
+                  run-jar:dev   (print-exec '(shell "java -XX:-OmitStackTraceInFastThrow -jar main-dev.jar"))
+                  run-jar:prod  (print-exec '(shell "java -XX:-OmitStackTraceInFastThrow -jar main-prod.jar"))}}
