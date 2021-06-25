@@ -4,6 +4,7 @@
                                  [clojure.string :refer [join]])
                   ; COMMON
                   ; TODO: try to replace print-exec by using :enter and (current-task)
+                  brew          (shell "brew bundle --verbose")
                   deps          (print-exec '(clojure "-M:antq -m antq.core") *command-line-args*)
                   deps-upgrade  (shell "bb deps --upgrade")
                   format        (print-exec '(clojure "-M:cljfmt -m cljfmt.main"
@@ -24,4 +25,6 @@
                   local-repl    (print-exec '(clojure "-M:dev:prod:test:rebel"))
                   run           (print-exec '(clojure "-M -m example.main") *command-line-args*)
                   capsule       (print-exec '(clojure "-M:pack -m mach.pack.alpha.capsule target/example-capsule.jar --application-id example --application-version \"1.0\" -m example.main"))
-                  capsule:run   (print-exec '(shell "java -XX:-OmitStackTraceInFastThrow -jar target/example-capsule.jar"))}}
+                  capsule:run   (print-exec '(shell "java -XX:-OmitStackTraceInFastThrow -jar target/example-capsule.jar"))
+                  uberjar       (print-exec '(shell "lein uberjar"))
+                  uberjar:run   (print-exec '(shell "java -XX:-OmitStackTraceInFastThrow -jar target/example-0.1.0-SNAPSHOT-standalone.jar"))}}

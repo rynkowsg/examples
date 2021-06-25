@@ -32,3 +32,22 @@
     Hello, World!
     bb capsule:run  11.12s user 0.34s system 341% cpu 3.352 total
 
+### Creating an uberjar & running it
+
+    % bb uberjar                                                                                                                                                                                                                                                                                                                                                       !10517
+    CMD: shell lein uberjar
+    ---
+    If there are a lot of uncached dependencies this might take a while ...
+    Compiling example.greet
+    Compiling example.main
+    Compiling example.system
+    Compiling utils.duct
+    Hello, World!
+    Created /Users/greg/Sources/rynkowski/examples/clojure-duct-uberjar/target/example-0.1.0-SNAPSHOT.jar
+    Created /Users/greg/Sources/rynkowski/examples/clojure-duct-uberjar/target/example-0.1.0-SNAPSHOT-standalone.jar
+
+    % time bb uberjar:run                                                                                                                                                                                                                                                                                                                                              !10519
+    CMD: shell java -XX:-OmitStackTraceInFastThrow -jar target/example-0.1.0-SNAPSHOT-standalone.jar
+    ---
+    Hello, World!
+    bb uberjar:run  4.24s user 0.24s system 277% cpu 1.617 total

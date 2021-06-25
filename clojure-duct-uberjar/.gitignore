@@ -25,3 +25,5 @@ pom.xml.asc
 *.iml
 
 /.rebel_readline_history
+
+Brewfile.lock.json
