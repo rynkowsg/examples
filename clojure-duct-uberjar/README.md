@@ -14,20 +14,21 @@
 
 ### Using deps.tools -M
 
-    % bb run:dev
-    CMD: clojure -M:dev -m example.main
+    % time bb run
+    CMD: clojure -M -m example.main
     ---
-    [dev] env-specific loaded
     Hello, World!
+    bb run  10.84s user 0.33s system 355% cpu 3.144 total
 
-### Compiling to a capsule and running jar
+### Creating a capsule & running it
 
-    % bb compile:dev
-    CMD: clojure -M:pack -m mach.pack.alpha.capsule uberjar-dev.jar -e app/dev/src --application-id example --application-version "1.0" -m example.main
+    % bb capsule
+    CMD: clojure -M:pack -m mach.pack.alpha.capsule target/example-capsule.jar --application-id example --application-version "1.0" -m example.main
     ---
 
-    % bb run-jar:dev
-    CMD: shell java -XX:-OmitStackTraceInFastThrow -jar uberjar-dev.jar
+    % time bb capsule:run
+    CMD: shell java -XX:-OmitStackTraceInFastThrow -jar target/example-capsule.jar
     ---
-    [dev] env-specific.clj loaded
     Hello, World!
+    bb capsule:run  11.12s user 0.34s system 341% cpu 3.352 total
+

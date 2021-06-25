@@ -4,7 +4,6 @@
    [duct.core :as duct]
    [integrant.core :as ig]
    [medley.core :refer [map-vals]]
-   [example.env-specific]
    [utils.duct :as uduct]))
 
 (defn compose-duct-config [app-config]
@@ -19,7 +18,7 @@
     {:duct.profile/base   (merge modules-config app-config)
      :duct.profile/dev    (or (some-> (io/resource "dev.edn") (duct/read-config)) {})
      :duct.profile/prod   (or (some-> (io/resource "prod.edn") (duct/read-config)) {})
-     :duct.profile/local  {}
+     :duct.profile/local  (or (some-> (io/resource "local.edn") (duct/read-config)) {})
      :duct.module/logging {}}))
 
 (defn system-config []

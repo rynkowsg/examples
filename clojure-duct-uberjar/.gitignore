@@ -17,8 +17,8 @@ pom.xml.asc
 # Duct
 /profiles.clj
 /logs
-/app/repl/res/local.edn
-/app/repl/src/local.clj
+/app/dev/res/local.edn
+/app/dev/src/local.clj
 
 # JetBrains
 .idea/
