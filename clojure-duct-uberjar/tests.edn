@@ -1,0 +1,13 @@
+#kaocha/v1
+{:tests [{:id :unit
+          :type :kaocha.type/clojure.test,
+          :source-paths ["app/main/src" "app/dev/src"]
+          :test-paths  ["app/test/src"]
+          :ns-patterns [".*"]}]
+ :reporter kaocha.report/documentation
+
+ :plugins [:orchestra] ; https://cljdoc.org/d/lambdaisland/kaocha/1.0.861/doc/orchestra-spec-instrumentation-#orchestra-spec-instrumentation
+
+ ; https://github.com/cloverage/cloverage
+ ; https://github.com/lambdaisland/kaocha-cloverage
+ :cloverage/opts {:summary? true :html? true}}
