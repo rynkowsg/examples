@@ -1,11 +1,14 @@
-;; shadow-cljs configuration
-{:source-paths
- ["src/dev"
-  "src/main"
-  "src/test"]
+{;; Only for pom.xml
+ :source-paths
+ ["src/dev" "src/main" "src/test"]
 
- :dependencies
- []
+ :deps
+ {:aliases [:dev :test]}
 
  :builds
- {}}
+ {:script {:target    :node-script
+           :main      example.core/-main
+           :output-to "lib/script.js"}}
+
+ :nrepl {:init-ns repl
+         :middleware []}}

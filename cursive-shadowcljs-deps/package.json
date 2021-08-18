@@ -2,6 +2,14 @@
   "name": "example",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "pom": "shadow-cljs pom",
+    "build:watch": "shadow-cljs watch script",
+    "build:watch:deps": "clj -M:dev -m shadow.cljs.devtools.cli watch script",
+    "build": "shadow-cljs release script",
+    "repl": "shadow-cljs cljs-repl script",
+    "run:script": "node lib/script.js"
+  },
   "devDependencies": {
     "shadow-cljs": "2.15.4"
   },
