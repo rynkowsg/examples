@@ -1,0 +1,3 @@
+[submodule "clj-fullstack-shadowcljs-reframe"]
+	path = clj-fullstack-shadowcljs-reframe
+	url = git@github.com:rynkowsg/exercise-scramblies.git
