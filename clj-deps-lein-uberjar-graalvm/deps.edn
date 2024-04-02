@@ -1,0 +1,9 @@
+{:paths ["app/main/src"]
+
+ :deps
+ {org.clojure/clojure {:mvn/version "1.11.2"}}
+
+ :aliases
+ {;; only required at lein build time for native-image
+  :native
+  {:extra-deps {com.github.clj-easy/graal-build-time {:mvn/version "1.0.5"}}}}}

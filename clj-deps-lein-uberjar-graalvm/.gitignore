@@ -1,0 +1,14 @@
+# JetBrains IDEs
+/.idea/*
+!/.idea/codeStyles/
+!/.idea/dictionaries/
+!/.idea/repl-commands.xml
+!/.idea/runConfigurations/
+*.iml
+
+# Clojure
+.cpcache
+.nrepl-port
+
+# Leiningen
+/target
